@@ -26,6 +26,9 @@ export const current = query({
 export const upsertFromClerk = internalMutation({
   args: { data: v.any() as Validator<UserJSON> },
   async handler(ctx, { data }) {
+    console.log(
+      "Running upsertFromClerk() to get user data and store it in Convex's database"
+    );
     const userAttributes = {
       email: data.email_addresses[0].email_address,
       clerkUserId: data.id,
@@ -33,7 +36,7 @@ export const upsertFromClerk = internalMutation({
       lastName: data.last_name ?? undefined,
       imageUrl: data.image_url ?? undefined,
     };
-
+    console.log(userAttributes);
     const user = await userByClerkUserId(ctx, data.id);
 
     if (user === null) {
@@ -67,6 +70,7 @@ export async function getCurrentUserOrThrow(ctx: QueryCtx) {
 
 export async function getCurrentUser(ctx: QueryCtx) {
   const identity = await ctx.auth.getUserIdentity();
+  console.log(identity);
   if (identity === null) {
     return null;
   }

@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    domains: ["secret-partridge-635.convex.cloud"],
+  },
+};
 
 export default nextConfig;

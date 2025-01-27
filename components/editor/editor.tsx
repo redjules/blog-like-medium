@@ -111,7 +111,7 @@ export default function Editor({
   //   else setInitialContent(defaultEditorContent)
   // }, [])
 
-  if (!initialContent) return null;
+  if (!initialContent) return "hello"; //null;
 
   return (
     <div className="relative w-full max-w-screen-lg">
@@ -121,7 +121,7 @@ export default function Editor({
           initialContent={initialContent}
           extensions={extensions}
           className={cn(
-            "relative w-full max-w-screen-lg bg-background",
+            "p-5 relative w-full max-w-screen-lg bg-background",
             editable
               ? "h-[450px] overflow-scroll rounded-md border border-input shadow-sm"
               : "min-h-[500px]"
@@ -135,7 +135,7 @@ export default function Editor({
             handleDrop: (view, event, _slice, moved) =>
               handleImageDrop(view, event, moved, uploadFn),
             attributes: {
-              class: `prose dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full ${editable ? "cursor-text text-sm" : "cursor-default !p-0"}`,
+              class: `h-[400px] prose dark:prose-invert prose-headings:font-title font-default focus:outline-none max-w-full ${editable ? "cursor-text text-sm" : "cursor-default !p-10"}`,
             },
           }}
           onUpdate={({ editor }) => {

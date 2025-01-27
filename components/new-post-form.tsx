@@ -72,6 +72,11 @@ export default function NewPostForm() {
       return;
     }
 
+    if (!data.coverImageId) {
+      toast.error("Please add a cover image");
+      return;
+    }
+
     try {
       const postSlug = await createPost({
         ...data,

@@ -10,15 +10,20 @@ http.route({
   path: "/clerk-users-webhook",
   method: "POST",
   handler: httpAction(async (ctx, request) => {
+    console.log("Running clerk webhook POST");
     const event = await validateRequest(request);
 
     if (!event) {
+      console.log("event is null, return 400 status");
       return new Response("Error occured", { status: 400 });
     }
 
     switch (event.type) {
-      case "user.created": // intentional fallthrough
+      case "user.created":
+        console.log("User created");
+      // intentional fallthrough
       case "user.updated":
+        console.log("User modified");
         await ctx.runMutation(internal.users.upsertFromClerk, {
           data: event.data,
         });
